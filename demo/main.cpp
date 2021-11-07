@@ -1,5 +1,5 @@
-#include <example.hpp>
+#include <myptr.hpp>
 
 int main() {
-  example();
+  SharedPtr<int> p1(new int(9));
 }
