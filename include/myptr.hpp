@@ -1,7 +1,7 @@
 // Copyright 2021 Your Name <your_email>
 
-#ifndef INCLUDE_MYPTR_HPP
-#define INCLUDE_MYPTR_HPP
+#ifndef INCLUDE_MYPTR_HPP_
+#define INCLUDE_MYPTR_HPP_
 #include <iostream>
 
 template <typename T>
@@ -10,7 +10,7 @@ class SharedPtr {
   SharedPtr() : myPtr(nullptr), myCount(nullptr){}
   explicit SharedPtr(T* ptr) : myPtr(ptr),
                                myCount(new std::atomic_uint(1)) {
-    (*myCount)=1;
+    (*myCount) = 1;
   }
   SharedPtr(const SharedPtr& r) : myPtr(r.myPtr),
                                   myCount(r.myCount) {
@@ -35,7 +35,8 @@ class SharedPtr {
         if (*myCount == 1) { // если это последний указатель, то удаляем все
           delete myPtr;      // и записываем новые данные, если не последний,
           delete myCount;    // то уменьшаем на 1 и заменяем данные
-        } else
+        }
+        else
           (*myCount)--;
       }
       myPtr = r.myPtr;
@@ -51,7 +52,8 @@ class SharedPtr {
         if (*myCount == 1){
           delete myPtr;
           delete myCount;
-        } else
+        }
+        else
           (*myCount)--;
       }
       myPtr = r.myPtr;
@@ -65,7 +67,8 @@ class SharedPtr {
   explicit operator bool() const{
     if (myCount != nullptr){
       return true;
-    } else
+    }
+    else
       return false;
   }
 
@@ -87,7 +90,8 @@ class SharedPtr {
         delete myCount;
         delete myPtr;
       }
-      else (*myCount)--;
+      else
+        (*myCount)--;
     }
     myPtr = nullptr;
     myCount = nullptr;
@@ -98,25 +102,28 @@ class SharedPtr {
       if (*myCount == 1){
         delete myCount;
         delete myPtr;
-      } else
+      }
+      else
         (*myCount)--;
     }
     myPtr = ptr;
     *myCount = 1;
   }
 
-  void swap(SharedPtr& r){
+  void mswap(SharedPtr& r){
     SharedPtr<T> tmp;
     tmp = r;
     r = *this;
     *this = tmp;
   }
 
-  // возвращает количество объектов SharedPtr, которые ссылаются на тот же управляемый объект
+  // возвращает количество объектов SharedPtr,
+  // которые ссылаются на тот же управляемый объект
   [[nodiscard]]auto use_count() const -> size_t {
     if (myCount) {
       return *myCount;
-    } else
+    }
+    else
       return 0;
   }
 
@@ -125,4 +132,4 @@ class SharedPtr {
   std::atomic_uint* myCount;
 };
 
-#endif //INCLUDE_MYPTR_HPP
+#endif //INCLUDE_MYPTR_HPP_

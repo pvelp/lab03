@@ -23,7 +23,7 @@ int main() {
 
   std::cout << "===================\n";
 
-  p2.swap(p1);
+  p2.mswap(p1);
   std::cout << "p1.use_count " << p1.use_count() << "\n";
   std::cout << "bool(p1) " << (bool(p1) ? "true" : "false") << "\n\n";
 
