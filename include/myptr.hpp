@@ -3,6 +3,7 @@
 #ifndef INCLUDE_MYPTR_HPP_
 #define INCLUDE_MYPTR_HPP_
 #include <iostream>
+#include <atomic>
 
 template <typename T>
 class SharedPtr {
