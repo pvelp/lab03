@@ -125,6 +125,7 @@ class SharedPtr {
       return 0;
     }
   }
+
  private:
   T* myPtr;
   std::atomic_uint* myCount;
