@@ -35,9 +35,9 @@ class SharedPtr {
         if (*myCount == 1) { // если это последний указатель, то удаляем все
           delete myPtr;      // и записываем новые данные, если не последний,
           delete myCount;    // то уменьшаем на 1 и заменяем данные
-        }
-        else
+        } else {
           (*myCount)--;
+        }
       }
       myPtr = r.myPtr;
       myCount = r.myCount;
@@ -48,13 +48,13 @@ class SharedPtr {
 
   auto operator=(SharedPtr&& r) noexcept -> SharedPtr&{
     if (this != &r){
-      if (myCount){ // аналогичная проверка как в присваивание копированием
-        if (*myCount == 1){
+      if (myCount) {  // аналогичная проверка как в присваивание копированием
+        if (*myCount == 1) {
           delete myPtr;
           delete myCount;
-        }
-        else
+        } else {
           (*myCount)--;
+        }
       }
       myPtr = r.myPtr;
       myCount = r.myCount;
@@ -64,14 +64,13 @@ class SharedPtr {
   }
 
   // проверяет, указывает ли указатель на объект
-  explicit operator bool() const{
-    if (myCount != nullptr){
+  explicit operator bool() const {
+    if (myCount != nullptr) {
       return true;
-    }
-    else
+    } else {
       return false;
+    }
   }
-
   auto operator*() const -> T&{
     return (*myPtr);
   }
@@ -85,26 +84,26 @@ class SharedPtr {
   }
 
   void reset(){
-    if (myCount){
-      if (*myCount == 1){
+    if (myCount) {
+      if (*myCount == 1) {
         delete myCount;
         delete myPtr;
-      }
-      else
+      } else {
         (*myCount)--;
+      }
     }
     myPtr = nullptr;
     myCount = nullptr;
   }
 
   void reset(T* ptr){
-    if (myCount){
-      if (*myCount == 1){
+    if (myCount) {
+      if (*myCount == 1) {
         delete myCount;
         delete myPtr;
-      }
-      else
+      } else {
         (*myCount)--;
+      }
     }
     myPtr = ptr;
     *myCount = 1;
@@ -122,11 +121,10 @@ class SharedPtr {
   [[nodiscard]]auto use_count() const -> size_t {
     if (myCount) {
       return *myCount;
-    }
-    else
+    } else {
       return 0;
+    }
   }
-
  private:
   T* myPtr;
   std::atomic_uint* myCount;
