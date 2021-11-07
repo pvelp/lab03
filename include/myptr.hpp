@@ -107,7 +107,6 @@ class SharedPtr {
     }
     myPtr = nullptr;
     myCount = nullptr;
-
   }
 
 //  void reset(T* ptr){ SharedPtr(ptr).mswap(*this);}
