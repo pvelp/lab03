@@ -45,7 +45,8 @@ class SharedPtr {
 
   auto operator=(const SharedPtr& r) -> SharedPtr&{
     if (this != &r) {
-      if (myCount) { //если до этого указывал на объект, то у него был счетчик
+      if (myCount) {
+        //если до этого указывал на объект, то у него был счетчик
 //        if (*myCount == 1) { // если это последний указатель, то удаляем все
 //          delete myPtr;      // и записываем новые данные, если не последний,
 //          delete myCount;    // то уменьшаем на 1 и заменяем данные
@@ -77,8 +78,6 @@ class SharedPtr {
       r.myCount = r.myPtr = nullptr; //удаляем указатель, т.к. теперь он в this
       return *this;
     }
-//    return *this;
-//  }
 
   // проверяет, указывает ли указатель на объект
   explicit operator bool() const {
