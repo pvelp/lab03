@@ -23,18 +23,6 @@ class SharedPtr {
     r.myCount = nullptr;
   }
   ~SharedPtr(){
-//    if (!myCount){
-//      return;
-//    }
-//    if (*myCount == 0){
-//      delete myCount;
-//      delete myPtr;
-//      return;
-//    }
-//    if (--(*myCount) == 0){
-//      delete myPtr;
-//      delete myCount;
-//    }
     if (*myCount == 1){
       delete myCount;
       delete myPtr;
@@ -46,13 +34,6 @@ class SharedPtr {
   auto operator=(const SharedPtr& r) -> SharedPtr&{
     if (this != &r) {
       if (myCount) {
-        //если до этого указывал на объект, то у него был счетчик
-//        if (*myCount == 1) { // если это последний указатель, то удаляем все
-//          delete myPtr;      // и записываем новые данные, если не последний,
-//          delete myCount;    // то уменьшаем на 1 и заменяем данные
-//        } else {
-//          (*myCount)--;
-//        }
           this->~SharedPtr();
       }
       myPtr = r.myPtr;
@@ -64,13 +45,6 @@ class SharedPtr {
 
   auto operator=(SharedPtr&& r) noexcept -> SharedPtr&{
     if (this != &r){
-//      if (myCount) {  // аналогичная проверка как в присваивание копированием
-//        if (*myCount == 1) {
-//          delete myPtr;
-//          delete myCount;
-//        } else {
-//          (*myCount)--;
-//        }
         this->~SharedPtr();
       }
       myPtr = r.myPtr;
@@ -108,7 +82,6 @@ class SharedPtr {
     myCount = nullptr;
   }
 
-//  void reset(T* ptr){ SharedPtr(ptr).mswap(*this);}
   void reset(T* ptr){
     if (myCount) {
       if (*myCount == 1) {

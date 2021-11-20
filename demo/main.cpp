@@ -49,4 +49,7 @@ int main() {
   std::cout << p5.operator->() << std::endl;
   std::cout << p5.get() << std::endl;
 
+  SharedPtr<std::string> ptr;
+  std::cout << "bool(ptr) " << (bool(ptr) ? "true" : "false") << std::endl;
+
 }
